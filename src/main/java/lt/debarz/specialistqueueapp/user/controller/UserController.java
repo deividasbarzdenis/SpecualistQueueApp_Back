@@ -4,7 +4,7 @@ package lt.debarz.specialistqueueapp.user.controller;
 import lombok.AllArgsConstructor;
 import lt.debarz.specialistqueueapp.user.dto.UserDto;
 import lt.debarz.specialistqueueapp.user.model.User;
-import lt.debarz.specialistqueueapp.user.security.UserService;
+import lt.debarz.specialistqueueapp.user.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -34,7 +34,7 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @PostMapping("/api/users")
+    @PostMapping("/api/signup")
     public ResponseEntity<UserDto> addUser(@RequestBody @Valid UserDto userDto) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(userService.createUser(userDto));

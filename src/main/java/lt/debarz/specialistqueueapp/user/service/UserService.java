@@ -1,4 +1,4 @@
-package lt.debarz.specialistqueueapp.user.security;
+package lt.debarz.specialistqueueapp.user.service;
 
 import lombok.AllArgsConstructor;
 import lt.debarz.specialistqueueapp.user.dto.UserDto;
