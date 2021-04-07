@@ -38,6 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
+                .antMatchers(SWAGGER_URLS).permitAll()
                 .antMatchers("/login", "/api/signup").permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -47,6 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilter(new JwtAuthenticationFilter(authenticationManager(), jwtProvider))
                 .addFilter(new JwtAuthorizationFilter(authenticationManager(), jwtProvider));
     }
+
     @Override
     public void configure(WebSecurity web) {
         web.ignoring().antMatchers("/h2/**");
@@ -68,4 +70,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder encoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
+
+    private static final String[] SWAGGER_URLS = {
+            // -- swagger ui
+            "/swagger-resources/**",
+            "/swagger-ui.html",
+            "/v2/api-docs",
+            "/webjars/**"
+    };
 }
