@@ -1,6 +1,7 @@
 package lt.debarz.specialistqueueapp.user.model;
 
 import lombok.*;
+import lt.debarz.specialistqueueapp.queue.model.Queue;
 import org.hibernate.annotations.Cascade;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -43,6 +44,9 @@ public class User implements UserDetails {
     private String email;
 
     private String phone;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private Set<Queue> clients = new HashSet<>();
 
     @ManyToMany
     @Cascade(org.hibernate.annotations.CascadeType.PERSIST)

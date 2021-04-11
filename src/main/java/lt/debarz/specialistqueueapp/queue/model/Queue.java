@@ -1,6 +1,7 @@
 package lt.debarz.specialistqueueapp.queue.model;
 
 import lombok.*;
+import lt.debarz.specialistqueueapp.user.model.User;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -43,6 +44,7 @@ public class Queue {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date registerTime;
 
-
+    @ManyToOne
+    private User user;
 
 }
