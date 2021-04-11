@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lt.debarz.specialistqueueapp.queue.dto.QueueDto;
 import lt.debarz.specialistqueueapp.user.model.Role;
 import lt.debarz.specialistqueueapp.user.model.User;
 
@@ -39,14 +40,20 @@ public class UserDto {
 
     private String phone;
 
+    private String speciality;
+
+    private Set<QueueDto> clients = new HashSet<>();
+
     private Set<String> roles = new HashSet<>();
 
+    //response after successful login
     public UserDto(User user) {
         this.id = user.getId();
         this.username=user.getUsername();
         this.name=user.getName();
         this.lastname =user.getLastname();
         this.email = user.getEmail();
+        this.speciality=user.getSpeciality();
         this.phone = user.getPhone();
         this.roles=user.getRoles().stream()
                 .map(Role::getRoleName)

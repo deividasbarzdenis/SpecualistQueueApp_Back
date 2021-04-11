@@ -45,6 +45,11 @@ public class User implements UserDetails {
 
     private String phone;
 
+    @Column(nullable = false)
+    @NotBlank
+    @Size(min=3, max=254)
+    private String speciality;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<Queue> clients = new HashSet<>();
 
@@ -59,6 +64,12 @@ public class User implements UserDetails {
 
     public void addRole(Role role){
         roles.add(role);
+    }
+
+    public User addQueue(Queue queue){
+        queue.setUser(this);
+        this.clients.add(queue);
+        return this;
     }
 
     @Override
