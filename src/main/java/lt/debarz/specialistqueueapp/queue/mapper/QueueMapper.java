@@ -17,7 +17,7 @@ public class QueueMapper {
     public final Integer QUEUE_WAITING_MINUTES = 5;
     private final QueueRepository queueRepository;
 
-    public QueueDto covertQueueEntityToDto(Queue queue) {
+    public QueueDto convertQueueEntityToDto(Queue queue) {
         QueueDto queueDto = new QueueDto();
         queueDto.setId(queue.getId());
         queueDto.setQueueNumber(queue.getQueueNumber());
