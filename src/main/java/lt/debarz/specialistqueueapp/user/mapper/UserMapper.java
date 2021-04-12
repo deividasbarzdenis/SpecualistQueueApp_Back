@@ -1,6 +1,8 @@
 package lt.debarz.specialistqueueapp.user.mapper;
 
 import lombok.AllArgsConstructor;
+import lt.debarz.specialistqueueapp.queue.dto.QueueDto;
+import lt.debarz.specialistqueueapp.queue.model.Queue;
 import lt.debarz.specialistqueueapp.user.dto.UserDto;
 import lt.debarz.specialistqueueapp.user.model.Role;
 import lt.debarz.specialistqueueapp.user.model.User;
@@ -14,8 +16,8 @@ import java.util.stream.Collectors;
 @Component
 public class UserMapper {
 
-    private PasswordEncoder passwordEncoder;
-    private RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final RoleRepository roleRepository;
 
     public UserDto convertUserToDTO(User user) {
         UserDto userDto = new UserDto();
@@ -25,6 +27,10 @@ public class UserMapper {
         userDto.setEmail(user.getEmail());
         userDto.setName(user.getName());
         userDto.setPhone(user.getPhone());
+        userDto.setClients(user.getClients()
+                .stream()
+                .map(queue -> getOwnerDto(queue))
+                .collect(Collectors.toSet()));
         userDto.setRoles(user.getRoles().stream()
                 .map(Role::getRoleName)
                 .collect(Collectors.toSet()));
@@ -44,4 +50,14 @@ public class UserMapper {
         return user;
     }
 
+    private QueueDto getOwnerDto(Queue queue) {
+        QueueDto queueDto = new QueueDto();
+        queueDto.setId(queue.getId());
+        queueDto.setQueueNumber(queue.getQueueNumber());
+        queueDto.setName(queue.getName());
+        queueDto.setLastname(queue.getLastname());
+        queueDto.setCreationTime(queue.getRegisterTime());
+        queueDto.setRegisterTime(queue.getRegisterTime());
+        return queueDto;
+    }
 }
