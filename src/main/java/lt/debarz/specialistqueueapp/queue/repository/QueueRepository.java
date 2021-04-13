@@ -33,7 +33,7 @@ public interface QueueRepository extends JpaRepository<Queue, Long> {
     /**
      *  Get clients in the queue by registration time (order ascending, but not less then current time ).
      */
-    @Query("select a from Queue a where a.registerTime > CURRENT_TIME ")
+    @Query("select a from Queue a where a.registerTime > current_timestamp ")
     List<Queue> findAllRegistrationDatesNotLessThenCurrentTime(Pageable pageable);
 
     Queue findByLastname(String lastname);
