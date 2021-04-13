@@ -29,7 +29,7 @@ public class UserMapper {
         userDto.setPhone(user.getPhone());
         userDto.setClients(user.getClients()
                 .stream()
-                .map(queue -> getOwnerDto(queue))
+                .map(queue -> getQueueDto(queue))
                 .collect(Collectors.toSet()));
         userDto.setRoles(user.getRoles().stream()
                 .map(Role::getRoleName)
@@ -45,12 +45,16 @@ public class UserMapper {
         user.setEmail(userDTO.getEmail());
         user.setName(userDTO.getName());
         user.setPhone(userDTO.getPhone());
+        user.setClients(userDTO.getClients()
+                .stream()
+                .map(client -> getQueue(user, client))
+                .collect(Collectors.toSet()));
         Role role = roleRepository.getOne(2L);
         user.addRole(role);
         return user;
     }
 
-    private QueueDto getOwnerDto(Queue queue) {
+    private QueueDto getQueueDto(Queue queue) {
         QueueDto queueDto = new QueueDto();
         queueDto.setId(queue.getId());
         queueDto.setQueueNumber(queue.getQueueNumber());
@@ -59,5 +63,13 @@ public class UserMapper {
         queueDto.setCreationTime(queue.getRegisterTime());
         queueDto.setRegisterTime(queue.getRegisterTime());
         return queueDto;
+    }
+
+    private Queue getQueue(User user, QueueDto queueDto) {
+        Queue queue = new Queue();
+        queue.setName(queueDto.getName());
+        queue.setLastname(queueDto.getLastname());
+        user.addQueue(queue);
+        return queue;
     }
 }

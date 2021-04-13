@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lt.debarz.specialistqueueapp.user.dto.UserDto;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -27,5 +28,9 @@ public class QueueDto {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date registerTime;
+
+    private Long userId;
+
+    private String specialist;
 
 }

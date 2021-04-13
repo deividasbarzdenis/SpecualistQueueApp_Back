@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
@@ -22,7 +23,7 @@ public class Queue {
     private Long id;
 
     @Column(unique = true, nullable = false)
-    @NotBlank
+    @NotNull
     private Integer queueNumber;
 
     @Column(nullable = false)
@@ -30,7 +31,7 @@ public class Queue {
     @Size(min=3, max=254)
     private String name;
 
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
     @NotBlank
     @Size(min=3, max=254)
     private String lastname;
