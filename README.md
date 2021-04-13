@@ -22,6 +22,9 @@ Documentation API (Swagger) by accessing
 
 `http://localhost:8080/swagger-ui.html`
 
+Front end React.js application:
+`https://github.com/deividasbarzdenis/SpecualistQueueApp_Front`
+
 ## H2 Console
 `http://localhost:8080/h2` 
 jdbc:h2:mem:specialistApp
